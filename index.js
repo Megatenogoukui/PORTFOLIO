@@ -208,9 +208,9 @@ document.querySelectorAll(".skill").forEach((element)=>{
 
 
 circleChipku()
-// revealTOSpan();
-// valueSetter();
-// loaderAnimation();
+revealTOSpan();
+valueSetter();
+loaderAnimation();
 locomotive();
 cardHoverEffect() ;
 imageMove();
