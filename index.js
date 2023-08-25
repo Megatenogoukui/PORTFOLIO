@@ -32,8 +32,7 @@ function locomotive() {
     ScrollTrigger.refresh();
   }
 
-
-function cardHoverEffect() {
+  function cardHoverEffect() {
     var showImage;
     document.querySelectorAll(".cont")
         .forEach(function (cont) {
@@ -51,11 +50,7 @@ function cardHoverEffect() {
             })
         })
 }
-function valueSetter() {
-    
-    gsap.set("#home .parent .child", { y: "100%" });
-    
-}
+
 function revealTOSpan() {
     document.querySelectorAll(".reveal")
         .forEach(function (elem) {
@@ -82,6 +77,7 @@ function revealTOSpan() {
 
         })
 }
+
 function loaderAnimation() {
     var tl = gsap.timeline();
 
@@ -122,16 +118,13 @@ function loaderAnimation() {
             delay: -0.5,
             ease: Circ.easeInOut,
             onComplete: function () {
-                Home();
+              setTimeout(function Home(){
+                document.querySelector(".page1").style.opacity = 1;
+              },2);
             }
         })
 
 }
-setTimeout(function Home(){
-  document.querySelector(".page1").style.opacity = 1;
-},2);
-
-
 
 function circleChipku(){
 
@@ -150,8 +143,8 @@ function circleChipku(){
     var yScale = gsap.utils.clamp(0.8, 1.2 , yDiff);
 
 
-    xPrev = xDiff;
-    yPrev = yDiff;
+    xPrev = dets.clientX;
+    yPrev = dets.clientY;
     mouseCircle(xScale , yScale)
   })
 
@@ -201,22 +194,7 @@ document.querySelectorAll(".skill").forEach((element)=>{
 
 }
 
-
-
-
-
-
-
-circleChipku()
-revealTOSpan();
-valueSetter();
-loaderAnimation();
-locomotive();
-cardHoverEffect() ;
-imageMove();
-
-
-
+function pageAnimate(){
   var page1 = gsap.timeline( {
     scrollTrigger: {
         trigger: ".page1 h1",  // Corrected selector
@@ -249,7 +227,7 @@ imageMove();
       },
   })
   page2.to(".main" , {
-    backgroundColor:"#fff"
+    backgroundColor:"#FCFAF8"
   })
 
   var img = gsap.timeline({
@@ -279,4 +257,81 @@ imageMove();
  page4.to(".main" , {
     backgroundColor:"#0F0D0D"
  })
+ var page5 = gsap.timeline({
+  scrollTrigger: {
+      trigger: ".page5",  // Corrected selector
+      scroller: ".main",
+      start: "top 75%",
+      end: "top 0%",
+      scrub: 5,
+   
+    },
+})
+page5.to(".main" , {
+  backgroundColor:"#0F0D0D"
+})
+ var page6 = gsap.timeline({
+  scrollTrigger: {
+      trigger: ".page6",  // Corrected selector
+      scroller: ".main",
+      start: "top 75%",
+      end: "top 0%",
+      scrub: 5,
+   
+    },
+})
+page6.to(".main" , {
+  backgroundColor:"#FCFAF8"
+})
  
+}
+
+function movingFooter(){
+  const linkElements = document.querySelectorAll('.footer a');
+
+linkElements.forEach((link, index) => {
+  gsap.fromTo(
+    link,
+    {
+      y: 0,
+    },
+    {
+      y: 7,
+      duration: 1,
+      repeat: -1,
+      delay: index, // Add a delay based on index to stagger animations
+      yoyo: true,
+      ease: "power1.inOut",
+    }
+  );
+});
+
+}
+
+function removingObst(){
+  const obst1 = document.querySelector("#loader h1")
+  const obst2 = document.querySelector(".reveal .parent")
+  setTimeout(()=>{
+    
+    obst1.style.display = "none"; 
+    obst2.style.display = "none";
+  },5000);
+  } 
+
+
+
+revealTOSpan();
+loaderAnimation();
+locomotive();
+pageAnimate()
+circleChipku()
+cardHoverEffect();
+imageMove();
+movingFooter();
+removingObst();
+
+
+
+
+
+
