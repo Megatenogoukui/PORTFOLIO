@@ -693,4 +693,16 @@ body,html{
 .links {
     gap: 4vw;
 }
+.page6 {
+   
+    margin-top: 0vh;
+   
+}
+.page4 {
+    min-height: 26vh;
+}
+.element h1 a {
+    text-decoration: none;
+    font-size: 7vh;
+}
 }
