@@ -589,5 +589,10 @@ body,html{
     min-height: 45vh;
    
 }
+/* Page5 */
+.page5 .skill h1 {
+    font-size: 20px;
+    font-weight: 400;
+}
 
 }
