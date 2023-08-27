@@ -711,4 +711,7 @@ body,html{
     
     
 }
+.mouse{
+    display: none;
+}
 }
