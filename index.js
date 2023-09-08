@@ -177,7 +177,7 @@ document.querySelectorAll(".skill").forEach((element)=>{
   element.addEventListener("mousemove" , (dets) => {
     const diff = dets.clientY - element.getBoundingClientRect().top;
     
-    var diffRot = dets.clientX - rotate;
+    diffRot = dets.clientX - rotate;
     rotate = dets.clientX
 
     gsap.to(element.querySelector("img"), {
@@ -317,7 +317,12 @@ function removingObst(){
     obst2.style.display = "none";
   },5000);
   } 
-
+window.onload = function updateClass(){
+    setTimeout(function() {
+      document.querySelector("removeLoco").classList.add('has-scroll');
+    }, 5000);
+  }
+  
 
 
 revealTOSpan();
