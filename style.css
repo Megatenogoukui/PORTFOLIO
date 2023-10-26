@@ -277,6 +277,8 @@ body,html{
     display: flex;
     justify-content:space-between;
     align-items: baseline;
+    
+    flex-wrap: wrap;
 }
 .cont{
     
@@ -296,7 +298,14 @@ body,html{
 }
 .cont2{
     position: relative;
+    
     width: 28%;
+}
+.cont3{
+    position: relative;
+    margin:0 auto;
+    margin-bottom: 5%;
+    width: 32%;
 }
 
 .projectName{
