@@ -1,5 +1,9 @@
 // LocomotiveScroll
 function locomotive() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined" || typeof LocomotiveScroll === "undefined") {
+    return;
+  }
+
   gsap.registerPlugin(ScrollTrigger);
 
   const locoScroll = new LocomotiveScroll({
@@ -36,23 +40,24 @@ function cardHoverEffect() {
   var showImage;
   document.querySelectorAll(".cont").forEach(function (cont) {
     cont.addEventListener("mousemove", function (dets) {
-      showImage = dets.target;
-      document.querySelector("#cursor").children[
-        dets.target.dataset.index
-      ].style.opacity = 1;
-      document.querySelector("#cursor").children[
-        dets.target.dataset.index
-      ].style.transform = `translate(${dets.clientX}px ,${
+      var target = dets.currentTarget;
+      showImage = target;
+      var cursorItem = document.querySelector("#cursor").children[target.dataset.index];
+      if (!cursorItem) return;
+
+      cursorItem.style.opacity = 1;
+      cursorItem.style.transform = `translate(${dets.clientX}px , ${
         dets.clientY + 2100
       }px)`;
-      showImage.style.filter = "grayscale(1)";
+      target.style.filter = "grayscale(1)";
       document.querySelector("#work").style.backgroundColor =
-        dets.target.dataset.color;
+        target.dataset.color;
     });
-    cont.addEventListener("mouseleave", function (dets) {
-      document.querySelector("#cursor").children[
-        showImage.dataset.index
-      ].style.opacity = 0;
+    cont.addEventListener("mouseleave", function () {
+      if (!showImage) return;
+
+      var cursorItem = document.querySelector("#cursor").children[showImage.dataset.index];
+      if (cursorItem) cursorItem.style.opacity = 0;
       showImage.style.filter = "grayscale(0)";
       document.querySelector("#work").style.backgroundColor = "#F2F2F2";
     });
@@ -185,6 +190,10 @@ function imageMove() {
 }
 
 function pageAnimate() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
   var page1 = gsap.timeline({
     scrollTrigger: {
       trigger: ".page1 h1", // Corrected selector
@@ -276,6 +285,7 @@ function pageAnimate() {
 
 function movingFooter() {
   const linkElements = document.querySelectorAll(".footer a");
+  if (!linkElements || !linkElements.length) return;
 
   linkElements.forEach((link, index) => {
     gsap.fromTo(
@@ -298,6 +308,7 @@ function movingFooter() {
 function removingObst() {
   const obst1 = document.querySelector("#loader h1");
   const obst2 = document.querySelector(".reveal .parent");
+  if (!obst1 || !obst2) return;
   setTimeout(() => {
     obst1.style.display = "none";
     obst2.style.display = "none";
@@ -310,11 +321,17 @@ window.onload = function updateClass() {
 };
 
 revealTOSpan();
-loaderAnimation();
-locomotive();
-pageAnimate();
+try {
+  loaderAnimation();
+  locomotive();
+  pageAnimate();
+} catch (err) {
+  console.error("Portfolio animation init failed:", err);
+}
 circleChipku();
 cardHoverEffect();
-imageMove();
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  imageMove();
+}
 movingFooter();
 removingObst();
