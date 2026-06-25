@@ -307,6 +307,12 @@ body,html{
     margin-bottom: 5%;
     width: 32%;
 }
+.cont4{
+    position: relative;
+    margin:0 auto;
+    margin-bottom: 5%;
+    width: 38%;
+}
 
 .projectName{
     display: flex;
