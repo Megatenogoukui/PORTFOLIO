@@ -305,7 +305,7 @@ function removingObst() {
 }
 window.onload = function updateClass() {
   setTimeout(function () {
-    document.querySelector("removeLoco").classList.add("has-scroll");
+    document.querySelector("#removeLoco").classList.add("has-scroll");
   }, 5000);
 };
 
